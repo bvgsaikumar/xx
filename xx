@@ -1,0 +1,61 @@
+#define E1 11  // Enable Pin for motor 1
+#define E2 6 // Enable Pin for motor 2
+ 
+#define I1 4  // Control pin 1 for motor 1
+#define I2 12  // Control pin 2 for motor 1
+#define I3 7  // Control pin 1 for motor 2
+#define I4 8  // Control pin 2 for motor 2
+#define potin A0  // Control pin 2 for pot
+void setup() {
+ 
+    pinMode(E1, OUTPUT);
+    pinMode(E2, OUTPUT);
+ 
+    pinMode(I1, OUTPUT);
+    pinMode(I2, OUTPUT);
+    pinMode(I3, OUTPUT);
+    pinMode(I4, OUTPUT);
+   pinMode(potin, INPUT);
+}
+
+ void speed(int a, int b, int x,int y)
+{
+
+y=analogRead(potin)/4;
+if(y>127)
+{
+ int x=(y-127);
+
+int a= 255;
+int b= 255-x;
+}
+else if(y<127)
+{int x=(127-y);
+int b= 255;
+int a= 255-x;
+}
+else
+{
+int b= 255;
+int a= 255;
+}
+}
+void loop()
+{
+  int a;
+  int b;
+  int x;
+  int y;
+  
+  
+ speed(a, b, x,y);
+    analogWrite(E1,  a); 
+    analogWrite(E2,  b); 
+ 
+    digitalWrite(I1, HIGH);
+    digitalWrite(I2, LOW);
+    digitalWrite(I3, HIGH);
+    digitalWrite(I4, LOW);
+    Serial.println(a);
+ 
+ }
